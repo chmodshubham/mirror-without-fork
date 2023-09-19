@@ -25,23 +25,25 @@ However, suppose you later decide that you'd like to work with this local clone 
 
 The command `git config --unset core.bare` essentially tells **Git**, "Hey, this repository shouldn't be considered 'bare' anymore." Once you run this command, the repository becomes a regular one, and you can interact with it just like any other local repository.
 
-```bash
-git config --unset core.bare
-```
-
 ### Create a New Private Repository on GitHub
 
 Head to your GitHub account and create a new repository. Make sure to set its visibility to `Private`.
 
 ### Set Up Remotes for Your New Repository
 
-By default, the repository you cloned (the original repository) is named `origin`. If you push without renaming this remote, you'll push to the original repository, which you might not have permissions to do. To avoid confusion or mistakes, it's recommended to rename the original repository's remote to something else (e.g., `upstream`).
+The term `origin` in Git refers to the default remote repository from which you cloned. It's like a nickname for the repository's URL. When you make a mirror clone, `origin` refers to the repository you cloned from.
+
+If you plan to push to a different repository (like your private one), you might get confused or make mistakes if you keep calling the original repository `origin`.
+
+The term `upstream` is conventionally used in the open-source community to refer to the main/original repository from which a fork is derived. By renaming the original `origin` to `upstream`, you're aligning with this convention. It helps clarify that `upstream` is the source or main repository, while `origin` will be your own repository.
+
+However, `upstream` is just a convention. You could name it anything else you like. Some alternatives might be `source`, `mainrepo`, or `original`, but `upstream` is widely understood in many Git contexts.
 
 ```bash
 git remote rename origin upstream
 ```
 
-After renaming the original remote, you can set your private repository as the `origin`, which is the standard name for the primary remote in most repositories. This makes it clear that when you do standard operations like git push or git pull, you're interacting with your private repository and not the original one.
+After renaming the original remote, you can set your private repository as the `origin`, which is the standard name for the primary remote in most repositories. This makes it clear that when you do standard operations like `git push` or `git pull`, you're interacting with your private repository and not the original one.
 
 ```bash
 git remote add origin https://github.com/YOUR_USERNAME/YOUR_NEW_REPO.git
